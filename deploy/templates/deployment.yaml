@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "mychart.fullname" . }}
+  labels:
+    app: {{ include "mychart.fullname" . }}
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: {{ include "mychart.fullname" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "mychart.fullname" . }}
+    spec:
+      containers:
+        - name: app
+          image: kovalski/simple-app:114eb8f
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+        - name: mongo
+          image: mongo:4.4
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: simple
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: simple
+            - name: MONGO_INITDB_DATABASE
+              value: simple
+
