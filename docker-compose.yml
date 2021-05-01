@@ -1,0 +1,18 @@
+version: "2.1"
+
+services:
+  mongodb:
+    image: mongo:4.4
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: simple
+      MONGO_INITDB_ROOT_PASSWORD: simple
+      MONGO_INITDB_DATABASE: simple
+    ports:
+      - "127.0.0.1:27017:27017"
+  minio:
+    image: bitnami/minio:latest
+    environment:
+      MINIO_ACCESS_KEY: simple
+      MINIO_SECRET_KEY: simple
+    ports:
+      - "127.0.0.1:9000:9000"
